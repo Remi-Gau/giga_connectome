@@ -133,8 +133,7 @@ def denoise_nifti_voxel(
     time_series_voxel = group_masker.fit_transform(
         img, confounds=cf, sample_mask=sm
     )
-    denoised_img = group_masker.inverse_transform(time_series_voxel)
-    return denoised_img
+    return group_masker.inverse_transform(time_series_voxel)
 
 
 def _check_exclusion(
@@ -145,6 +144,4 @@ def _check_exclusion(
         kept_vol = len(sample_mask)
     else:
         kept_vol = reduced_confounds.shape[0]
-    # if more noise regressors than volume, this data is not denoisable
-    remove = kept_vol < reduced_confounds.shape[1]
-    return remove
+    return kept_vol < reduced_confounds.shape[1]

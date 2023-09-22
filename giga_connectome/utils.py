@@ -56,7 +56,7 @@ def get_bids_images(
         for suffix, entities in bids_filters.items():
             if entity in entities:
                 # avoid clobbering layout.get
-                layout_get_kwargs.update({entity: entities[entity]})
+                layout_get_kwargs[entity] = entities[entity]
                 del queries[suffix][entity]
 
     subj_data = {
@@ -112,10 +112,7 @@ def parse_bids_filter(value: Path) -> dict:
 def parse_standardize_options(standardize: str) -> Union[str, bool]:
     if standardize not in ["zscore", "psc"]:
         raise ValueError(f"{standardize} is not a valid standardize strategy.")
-    if standardize == "psc":
-        return standardize
-    else:
-        return True
+    return standardize if standardize == "psc" else True
 
 
 def parse_bids_name(img: str) -> List[str]:

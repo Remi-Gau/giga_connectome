@@ -154,10 +154,7 @@ def run_postprocessing_dataset(
 
 def _set_file_flag(output_path: Path) -> str:
     """Find out if new file needs to be created."""
-    flag = "w"
-    if output_path.exists():
-        flag = "a"
-    return flag
+    return "a" if output_path.exists() else "w"
 
 
 def _fetch_h5_group(

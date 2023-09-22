@@ -26,11 +26,11 @@ def _simulate_img():
     corr = np.corrcoef(data[4, 4, 3:7, :])
     img = Nifti1Image(data, np.eye(4))
 
-    mask_v = np.zeros(data.shape[0:3])
+    mask_v = np.zeros(data.shape[:3])
     mask_v[4, 4, 3:7] = 1
     mask = Nifti1Image(mask_v, np.eye(4))
 
-    atlas = np.zeros(data.shape[0:3])
+    atlas = np.zeros(data.shape[:3])
     atlas[4, 4, 3:5] = 1
     atlas[4, 4, 5:7] = 2
     atlas = Nifti1Image(atlas, np.eye(4))
